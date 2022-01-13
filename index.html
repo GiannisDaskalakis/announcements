@@ -1,36 +1,12 @@
-﻿<html>
-    <head>
+<!DOCTYPE html>
+<html>
+<head>
 	<title>Insert data in MySQL database using Ajax</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script>
-			function picA() {				
-				document.getElementById('img').src = "a.jpg";
-			}
-
-			function picB() {				
-				document.getElementById('img').src = "b.jpg";
-			}
-			function picC() {				
-				document.getElementById('img').src = "c.png";
-			}
-		</script>
-        
-		<link href="hor-menu-styles.css" rel="stylesheet" type="text/css"/>
-    </head>
-    
-    <body>
-		<img id="img" src="b.jpg" style="width:400px" onmousemove="picA()" onmouseout="picB()"  onmousedown="picC()">
-        <img id="img" src="c.png" style="width:400px" onmousemove="picA()" onmouseout="picB()"  onmousedown="picC()">
-		<div id="tabs">
-			<ul>
-				<li><a href="arxikh.html"><span>Αρχική</span></a></li>
-				
-				
-			</ul>
-		</div>
-		<hr>
-	<div style="margin: auto;width: 60%;">
+</head>
+<body>
+<div style="margin: auto;width: 60%;">
 	<div class="alert alert-success alert-dismissible" id="success" style="display:none;">
 	  <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
 	</div>
@@ -95,6 +71,5 @@ $(document).ready(function() {
 	});
 });
 </script>
-</body>	
-	</body>
+</body>
 </html>
