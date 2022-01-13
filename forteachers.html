@@ -1,0 +1,39 @@
+﻿<html>
+    <head>
+		<script>
+			function picA() {				
+				document.getElementById('img').src = "a.jpg";
+			}
+
+			function picB() {				
+				document.getElementById('img').src = "b.jpg";
+			}
+			function picC() {				
+				document.getElementById('img').src = "c.png";
+			}
+		</script>
+        <style>
+		
+            body { 
+                background-repeat: no-repeat;
+                background-image: url('dask1.png');
+                background-color: teal
+            	} 
+                 	    
+        </style>
+		<link href="hor-menu-styles.css" rel="stylesheet" type="text/css"/>
+    </head>
+    
+    <body>
+		<img id="img" src="b.jpg" style="width:400px" onmousemove="picA()" onmouseout="picB()"  onmousedown="picC()">
+        <img id="img" src="c.png" style="width:400px" onmousemove="picA()" onmouseout="picB()"  onmousedown="picC()">
+		<div id="tabs">
+			<ul>
+				<li><a href="arxikh.html"><span>Αρχική</span></a></li>
+				
+				
+			</ul>
+		</div>
+		<hr>
+	</body>
+</html>
