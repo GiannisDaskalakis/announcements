@@ -79,7 +79,7 @@ $(document).ready(function() {
 				success: function(dataResult){
 					var dataResult = JSON.parse(dataResult);
 					if(dataResult.statusCode==200){
-						location.href = "welcome.html";						
+						location.href = "welcome.html?user="+USNAME;						
 					}
 					else if(dataResult.statusCode==201){
 						$("#error").show();
