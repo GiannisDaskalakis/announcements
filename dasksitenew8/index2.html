@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>example ajax</title>
+</head>
+
+<script>
+
+xmlHttp = new XMLHttpRequest();
+	
+function getResult() {
+	var USNAME = document.getElementById("textUSNAME").value;	
+	document.getElementById("resp").innerHTML = "";	
+	if (USNAME == null || USNAME == '') {			
+		return;
+	}
+		
+    var url = "apiget.php?USNAME="+USNAME;
+    xmlHttp.open("GET", url, true);				
+	xmlHttp.onreadystatechange = function() {setResult()};
+	xmlHttp.send(null);		
+}
+	
+function setResult() {		
+	if ((xmlHttp.readyState == 4) && (xmlHttp.status == 200)) {				
+		var res = document.getElementById("resp");
+		var response = xmlHttp.responseText;				
+		var resp = JSON.parse(response);
+		res.innerHTML ="";
+		if (resp[0] == null){
+			res.innerHTML = "<p>To ONOMA δεν βρέθηκε στη ΒΔ.</p>";
+			return;
+		}												
+		res.innerHTML += "<p>LNAME: "+resp[0].LNAME+"<p>";
+													 
+	}	
+}
+</script>
+
+<body>     
+    
+<div style ="border: 1px solid black; border-radius: 6px; padding:25px;margin-top:20px; ">			     
+	ONOMA ΚΑΘΗΓΗΤΗ: <input id=textUSNAME type='text' name='USNAME' onkeyup='getResult()' onchange='getResult()'>									 
+</div>				 			 
+<div style ="border: 1px solid black; border-radius: 6px; padding:25px; margin-top:20px; text-align:left" id=resp></div>
+ 
+     
+
+</body>
+
+</html>

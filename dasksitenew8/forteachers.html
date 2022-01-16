@@ -1,0 +1,100 @@
+﻿<html>
+    <head>
+	<title>Insert data in MySQL database using Ajax</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script>
+			function picA() {				
+				document.getElementById('img').src = "a.jpg";
+			}
+
+			function picB() {				
+				document.getElementById('img').src = "b.jpg";
+			}
+			function picC() {				
+				document.getElementById('img').src = "c.png";
+			}
+		</script>
+        
+		<link href="hor-menu-styles.css" rel="stylesheet" type="text/css"/>
+    </head>
+    
+    <body>
+		<img id="img" src="b.jpg" style="width:400px" onmousemove="picA()" onmouseout="picB()"  onmousedown="picC()">
+        <img id="img" src="c.png" style="width:400px" onmousemove="picA()" onmouseout="picB()"  onmousedown="picC()">
+		<div id="tabs">
+			<ul>
+				<li><a href="arxikh.html"><span>Αρχική</span></a></li>
+				
+				
+			</ul>
+		</div>
+		<hr>
+	<div style="margin: auto;width: 60%;">
+	<div class="alert alert-success alert-dismissible" id="success" style="display:none;">
+	  <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+	</div>
+	<div class="alert alert-danger alert-dismissible" id="error" style="display:none;">
+	  <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+	</div>
+
+	<button type="button" class="btn btn-success btn-sm" id="login">Login</button>
+	
+	
+	<form id="login_form" name="form1" method="post" style="display:none;">
+		
+		<div class="form-group">
+			<label for="usn">Username:</label>
+			<input type="text" class="form-control" id="USNAME" placeholder="USNAME" name="USNAME">
+		</div>
+		<div class="form-group">
+			<label for="pwd">Password:</label>
+			<input type="password" class="form-control" id="USPASSW" placeholder="USPASSW" name="USPASSW">
+		</div>
+		<input type="button" name="save" class="btn btn-primary" value="Login" id="butlogin">
+	</form>
+</div>
+
+<script>
+$(document).ready(function() {
+	$('#login').on('click', function() {
+		$("#login_form").show();
+		
+	});
+	
+	
+	$('#butlogin').on('click', function() {
+		var USNAME = $('#USNAME').val();
+		var USPASSW = $('#USPASSW').val();
+		if(USNAME!="" && USPASSW!="" ){
+			$.ajax({
+				url: "save.php",
+				type: "POST",
+				data: {
+					type:2,
+					USNAME: USNAME,
+					USPASSW: USPASSW						
+				},
+				cache: false,
+				success: function(dataResult){
+					var dataResult = JSON.parse(dataResult);
+					if(dataResult.statusCode==200){
+						location.href = "welcome.html?user="+USNAME;						
+					}
+					else if(dataResult.statusCode==201){
+						$("#error").show();
+						$('#error').html('Invalid EmailId or Password !');
+					}
+					
+				}
+			});
+		}
+		else{
+			alert('Please fill all the field !');
+		}
+	});
+});
+</script>
+</body>	
+	</body>
+</html>

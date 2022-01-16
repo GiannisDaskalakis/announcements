@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>TEACHERS INPUT</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script>
+			function picA() {				
+				document.getElementById('img').src = "a.jpg";
+			}
+
+			function picB() {				
+				document.getElementById('img').src = "b.jpg";
+			}
+			function picC() {				
+				document.getElementById('img').src = "c.png";
+			}
+		</script>
+       
+		<link href="hor-menu-styles.css" rel="stylesheet" type="text/css"/>
+    
+</head>
+
+<script>
+
+xmlHttp = new XMLHttpRequest();
+function getResult() {
+	var LNAME = document.getElementById("LNAME").value;	
+	var ANTEXT = document.getElementById("ANTEXT").value;	
+		
+	
+			
+	xmlHttp.open("POST", "apipost.php", true);				
+	xmlHttp.onreadystatechange = function() {setResult();};
+	xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");								     
+	xmlHttp.send("&LNAME="+LNAME+"&ANTEXT="+ANTEXT);		
+}
+
+function setResult() {
+	if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+		var response = xmlHttp.responseText;
+		var resp = JSON.parse(response);																										
+		if (resp.status == "ERROR"){
+			alert("Something goes wrong!");
+		}
+		else if (resp.status == "OK"){
+			alert("A record was entered");											
+			document.getElementById("LNAME").value="";
+			document.getElementById("ANTEXT").value="";
+			
+		}
+	}
+}
+	
+</script>
+<script>
+
+document.getElementById("demo").innerHTML = USNAME;
+
+</script>
+<body>     
+ <img id="img" src="b.jpg" style="width:400px" onmousemove="picA()" onmouseout="picB()"  onmousedown="picC()">
+ <img id="img" src="c.png" style="width:400px" onmousemove="picA()" onmouseout="picB()"  onmousedown="picC()">   
+ <hr>
+
+ <h1>You are logged in as user</h1>
+ <h1> <p id="loc" href = window.location.ref ></p> <h1>
+ <script>
+		let ref = window.location.href;
+		let query = location.search;
+
+		// document.getElementById("loc").innerHTML = query ;
+		let params_array = query.split('=');
+		document.getElementById("loc").innerHTML = params_array[1] ;
+
+</script>
+ 
+        <br>
+        <a href="logout.php"> <h1> Logout  </h1> </a>
+		
+		</div>	
+<div style ="border: 1px solid black; border-radius: 6px; padding:25px;margin-top:20px; ">			     
+	Όνομα Καθηγητή: <input id=LNAME type='text' name='LNAME'>
+	Ανακοίνωση: <input id=ANTEXT type='ANTEXT' name='ΑΝΤΕΧΤ' style="border: 1px solid black; border-radius: 6px; padding:25px;margin-top:20px; ">
+	<br/><br/>
+	<input type="button" value="register" onclick="getResult();">								 
+</div>				 			 
+ 
+     
+
+</body>
+
+</html>
